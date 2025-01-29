@@ -1,6 +1,7 @@
 const { Router } = require("express")
 const { z } = require("zod")
-const { UserModel } = require("../db")
+const { UserModel , PurchasesModel } = require("../db")
+
 const jwt = require("jsonwebtoken")
 const  { jwt_user_secret }  = require("../configure")
 const bcrypt = require("bcrypt")
@@ -59,7 +60,7 @@ const { auth } = require("../middlewares/user")
     
     })
     
-    userrouter.post("/login" ,async (req,res)=>{
+    userrouter.post("/signin" ,async (req,res)=>{
         
         const email  = req.body.email
         const password = req.body.password
@@ -97,12 +98,25 @@ const { auth } = require("../middlewares/user")
  
 userrouter.use(auth)
 
-    userrouter.get("/purchases" , (req,res)=>{
+    userrouter.get("/purchases" , async (req,res)=>{
+        const userid = req.userid;
+
+        try{
+            const purchase = await PurchasesModel.find({
+                userid : userid
+            })
     
-        res.json({
-            msg : "here are your are courses"
+           return  res.json({
+                purchase
+            })
+        }catch(e){
+
+            console.log("error while previewing your courses")
+            return res.json({
+                msg : "Error while previewing your  courses"
         })
-    
+        }
+        
     })
 
 

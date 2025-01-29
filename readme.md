@@ -30,7 +30,11 @@ This document provides an overview of the libraries used in the Course Selling A
 
 8. **nodemon**
     - **Usage**: nodemon is a utility that monitors for any changes in your source and automatically restarts your server. It is used during development to improve productivity.
+    - i have used in package json in script section , has a key name dev, so when we have to run , i simply write npm run dev
 
 ## Conclusion
 
 These libraries collectively help in building a robust, secure, and efficient course selling application. Each library serves a specific purpose, from handling HTTP requests and responses to managing data and ensuring security.
+
+## we used .env.exampale so i will upload this file in git hub for see users to what they have to include in .env file 
+

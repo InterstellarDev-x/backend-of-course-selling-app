@@ -107,6 +107,7 @@ adminroute.post("/createcourse" , async (req,res)=>{
         const { tittle , description , price, imageURL } = req.body
 
         try{
+            
 
            const course  =  await CoursesModel.create({
                 tittle : tittle,
@@ -134,27 +135,39 @@ adminroute.post("/createcourse" , async (req,res)=>{
     adminroute.post("/update/course" , async (req,res)=>{
         const adminId = req.adminid
         const { tittle , description , price, imageURL , courseId } = req.body
-
-        const course = await CoursesModel.findOne({
-            _id : courseId
-        })
+        try{
+            const course = await CoursesModel.updateOne({
+                creatorid : adminId,// this is the filter section , if it does not match than it will simply dont do anything 
+                _id : courseId
+            },{
+                tittle : tittle,
+                description : description,
+                price : price,
+                imageURL : imageURL
+            })
 
         console.log(course)
-        
-        res.json({
-            msg : "Courses updated Succesfully !! ",
-            msg : course
-        })
-
-        
+    
+            return res.json( {
+                msg : "Course Updated Successfully"
+            })
+        }catch(e){
+            return res.json({
+                msg : "Courses not updated"
+            })
+        }
      })
 
 
 
-    adminroute.get("/course/bulk" , (req,res)=>{
-    
+    adminroute.get("/course/bulk" , async (req,res)=>{
+        const adminId = req.adminid
+        const courses = await CoursesModel.find({
+            creatorid : adminId
+        })
+
         res.json({
-            msg : "admin get all the courses that "
+            courses
         })
         
      })
