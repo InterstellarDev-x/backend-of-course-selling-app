@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/adityakumar/Documents/projects_from_cohort-2/course-selling-app/routes/index'
+relocations:     []
+...

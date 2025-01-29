@@ -1,13 +1,9 @@
 const { Router } = require("express") 
 const courseroute = Router()
 
-courseroute.get("/purchases" , (req,res)=>{
-    
-    res.json({
-        msg : "here are your are courses"
-    })
 
-})
+
+
 
 courseroute.post("/purchase"  , (req,res)=>{
        res.json({
@@ -16,11 +12,14 @@ courseroute.post("/purchase"  , (req,res)=>{
 })
 
 
-courseroute.get("/courses" , (req,res)=>{
+courseroute.get("/preview" , (req,res)=>{
     res.josn({
-        msg : "here are the all courses from this seller"
+        msg : "here are the all courses "
     })
 })
+
+
+
 
 
 
